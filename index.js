@@ -39,7 +39,7 @@ async function run() {
     })
 
     app.get('/allProject', async(req, res)=>{
-        const result = await projectCollection.find().toArray()
+        const result = await projectCollection.find().sort({_id: -1}).toArray()
         res.send(result)
     })
 
@@ -54,6 +54,11 @@ async function run() {
         const message = req.body
         const result = await messageCollection.insertOne(message)
         res.send(result)
+    })
+
+    app.get('/message', async(req, res)=>{
+      const result = await messageCollection.find().sort({_id: -1}).toArray()
+      res.send(result)
     })
    
     console.log("Pinged your deployment. You successfully connected to MongoDB!");
